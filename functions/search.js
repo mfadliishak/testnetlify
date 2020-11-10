@@ -16,11 +16,18 @@ exports.handler = async (event) => {
   	.then((response) => response.json())
   	.catch((error) => console.error(error));
 
+  const firstResult = response.results[0];
+
   return {
     statusCode: 200,
     headers: {
-    	'Content-Type': 'application/json',
+    	'Content-Type': 'text/html',
     },
-    body: JSON.stringify({ response }),
+    body: `
+    	<img 
+    		src=${firstResult.urls.regular}
+    		alt=${firstResult.alt_description}
+    	/>
+    `,
   };
 };
